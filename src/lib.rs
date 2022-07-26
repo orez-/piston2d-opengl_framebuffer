@@ -26,17 +26,19 @@ impl FrameBuffer {
         FrameBuffer { fbo_id, texture }
     }
 
-    pub fn draw<F>(&self, viewport: Viewport, gl: &mut GlGraphics, f: F)
-    where F: FnOnce(Context, &mut GlGraphics) {
+    pub fn draw<F, U>(&self, viewport: Viewport, gl: &mut GlGraphics, f: F) -> U
+    where F: FnOnce(Context, &mut GlGraphics) -> U {
         unsafe {
             gl::BindFramebuffer(gl::FRAMEBUFFER, self.fbo_id);
         }
 
-        gl.draw(viewport, f);
+        let res = gl.draw(viewport, f);
 
         unsafe {
             gl::BindFramebuffer(gl::FRAMEBUFFER, 0);
         }
+
+        res
     }
 
     pub fn texture(&self) -> &Texture {
