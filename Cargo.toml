@@ -1,0 +1,14 @@
+[package]
+name = "piston2d-opengl_framebuffer"
+version = "0.1.0"
+edition = "2021"
+keywords = ["opengl", "graphics", "2d", "piston", "framebuffer"]
+
+[lib]
+name = "opengl_framebuffer"
+path = "src/lib.rs"
+
+[dependencies]
+gl = "0.13.0"
+piston2d-opengl_graphics = "0.78.0"
+piston_window = "0.120.0"
